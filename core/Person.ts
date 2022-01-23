@@ -1,4 +1,4 @@
-class Person {
+export default class Person {
 
   constructor(id: Number, name: String, surname: String, wishlist: String[]) {
     this.id = id;
