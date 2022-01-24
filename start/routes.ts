@@ -46,7 +46,7 @@ Route.post('/apply', async ({request, response}) => {
 
 Route.post('/shuffle', async () => {
   await santaService.shuffle()
-  return { rez: 'ave, Santas' }
+  return { rez: 'Alea jacta est, ave Santas' }
 })
 
 Route.get('/client/:id', async ({ request }) => {

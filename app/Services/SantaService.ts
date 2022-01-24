@@ -12,7 +12,7 @@ export default class SantaService {
   public async apply(person) {
     const count = (await Person.all()).length
     if (count >= MAXPLAYERS) {
-      throw new Exception('Too many Santas')
+      throw new Exception('Est modus in rebus. Too many Santas')
     }
 
     let p = new Person()
@@ -25,12 +25,12 @@ export default class SantaService {
 
   public async shuffle() {
     if (await Link.first()) {
-      throw new Exception('Game already started')
+      throw new Exception('Littĕra scripta manet. Game already started')
     }
 
     const count = (await Person.all()).length
     if (count<MINPLAYERS || count >= MAXPLAYERS) {
-      throw new Exception('illegal Santas quantity')
+      throw new Exception('Est modus in rebus, illegal Santas quantity')
     }
 
     const persons = await Person.all()
@@ -55,7 +55,7 @@ export default class SantaService {
         return rez
       }
     } else {
-      throw new Exception('cannot find your client')
+      throw new Exception('Felix, qui nihil debet, cannot find your client')
     }
   }
 }

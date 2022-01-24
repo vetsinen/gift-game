@@ -1,9 +1,10 @@
-import Person from "../core/Person";
+// import SantaService from "App/Services/SantaService"
+// const apply = (new SantaService()).apply
 
-export default  [
-  new Person(1, 'joe','doe', ['apple']),
-  new Person(2, 'ricko','ridd', ['mazzerati']),
-  new Person(3, 'kent','back', ['house']),
-  new Person(4, 'bruce','smith', ['teapot']),
+export default function () {
+    // apply('joe', 'doe', ['apple']),
+    // apply('ricko', 'ridd', ['mazzerati']),
+    // apply('kent', 'back', ['house']),
+    // apply('bruce', 'smith', ['teapot']),
+}
 
-]
