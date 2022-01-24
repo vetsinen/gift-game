@@ -1,0 +1,17 @@
+###
+GET http://127.0.0.1:3333/client/405
+Accept: application/json
+
+###
+
+POST http://127.0.0.1:3333/apply
+Content-Type: application/json
+
+{
+  "name":"joe",
+  "surname": "smith",
+  "wishlist": ["macbook"]
+}
+
+
+

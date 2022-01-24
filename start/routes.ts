@@ -19,6 +19,23 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
+import SantaService from "App/Services/Santa";
+
+Route.post('/apply', async ({request}) => {
+  let person = request.body()
+  console.log(person);
+  (new SantaService()).apply(person)
+  return { hello: person.name }
+})
+
+Route.post('/shuffle', async () => {
+  return { hello: 'ave, Santas' }
+})
+
+Route.get('/client/:id', async ({ request }) => {
+  console.log(request.param('id'))
+  return { client: 'Martialis' }
+})
 
 Route.get('/', async () => {
   return { hello: 'world' }
