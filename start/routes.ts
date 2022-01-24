@@ -20,28 +20,36 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 import SantaService from "App/Services/SantaService";
+import {schema} from "@ioc:Adonis/Core/Validator";
 //https://medium.com/@shemsiu/ioc-container-and-dependency-injection-in-adonis-v5-216774c2a476
 const santaService = new SantaService()
 
-Route.post('/apply', async ({request}) => {
-  let person = request.body()
-  console.log(person);
+Route.post('/apply', async ({request, response}) => {
 
-  await santaService.apply(person)
-  return { hello: person.name }
+  const newPersonSchema = schema.create({
+    name: schema.string({ trim: true }),
+    surname: schema.string({ escape: true }),
+    wishlist: schema.array().members(schema.string()),
+  })
+
+  let person
+  try {
+    person = await request.validate({ schema: newPersonSchema })
+  }
+  catch (error){
+    response.badRequest(error.messages)
+  }
+
+  let id = await santaService.apply(person)
+  return { id }
 })
 
 Route.post('/shuffle', async () => {
   await santaService.shuffle()
-  return { hello: 'ave, Santas' }
+  return { rez: 'ave, Santas' }
 })
 
 Route.get('/client/:id', async ({ request }) => {
   const id = parseFloat(request.param('id'))
-  let rez =  await santaService.getClient(id)
-  return rez
-})
-
-Route.get('/', async () => {
-  return { hello: 'world' }
+  return await santaService.getClient(id)
 })
