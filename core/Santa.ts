@@ -1,5 +1,4 @@
 import {Exception} from "@poppinss/utils";
-import Person from "./Person";
 
 const minPlayers = 3;
 const maxPlayers = 500;
@@ -14,16 +13,14 @@ export default class Santa { //Santa Domain
 
   }
 
-  public shuffle(persons: Person[]): boolean {
-    if (persons.length < minPlayers || persons.length > maxPlayers) {
+  public shuffle(personsIds) {
+    if (personsIds.length < minPlayers || personsIds.length > maxPlayers) {
       throw new Exception("illegal Santas quanity")
     }
-
-    let personsIds = persons.map(el => el.id)
     const n = personsIds.length
     let links: any = []
 
-    for (let i = 0, j; i < persons.length; i++) {
+    for (let i = 0, j; i < n; i++) {
       do {
         j = Math.floor(Math.random() * n)
       }
@@ -31,8 +28,7 @@ export default class Santa { //Santa Domain
       links.push([personsIds[i] , personsIds[j]])
       //console.log(personsIds[i], personsIds[j])
     }
-    console.log(links)
-    return true
+    return links
   }
 
   // public getPartner(id: number) {

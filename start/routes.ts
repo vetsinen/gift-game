@@ -19,22 +19,27 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
-import SantaService from "App/Services/Santa";
+import SantaService from "App/Services/SantaService";
+//https://medium.com/@shemsiu/ioc-container-and-dependency-injection-in-adonis-v5-216774c2a476
+const santaService = new SantaService()
 
 Route.post('/apply', async ({request}) => {
   let person = request.body()
   console.log(person);
-  (new SantaService()).apply(person)
+
+  await santaService.apply(person)
   return { hello: person.name }
 })
 
 Route.post('/shuffle', async () => {
+  await santaService.shuffle()
   return { hello: 'ave, Santas' }
 })
 
 Route.get('/client/:id', async ({ request }) => {
-  console.log(request.param('id'))
-  return { client: 'Martialis' }
+  const id = parseFloat(request.param('id'))
+  let rez =  await santaService.getClient(id)
+  return rez
 })
 
 Route.get('/', async () => {
