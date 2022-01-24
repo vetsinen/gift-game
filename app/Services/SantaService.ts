@@ -57,6 +57,5 @@ export default class SantaService {
     } else {
       throw new Exception('cannot find your client')
     }
-
   }
 }
