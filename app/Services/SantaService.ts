@@ -6,7 +6,7 @@ import {Exception} from "@poppinss/utils";
 
 const santa = new Santa()
 const MINPLAYERS = 3
-const MAXPLAYERS = 80
+const MAXPLAYERS = 300
 
 export default class SantaService {
   public async apply(person) {
