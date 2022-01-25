@@ -26,9 +26,10 @@ const santaService = new SantaService()
 
 Route.post('/apply', async ({request, response}) => {
 
+  console.log(request.body())
   const newPersonSchema = schema.create({
-    name: schema.string({ trim: true }),
-    surname: schema.string({ escape: true }),
+    name: schema.string({ trim: true, escape: false }),
+    surname: schema.string({ trim: true, escape: false }),
     wishlist: schema.array().members(schema.string()),
   })
 

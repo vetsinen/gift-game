@@ -1,0 +1,54 @@
+/client/{id}:
+  get:
+    description: see client
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 20
+          required: true
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Success
+
+/shuffle:
+  post:
+    description: start game
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Success
+
+/apply:
+  post:
+    description: add person
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                required: true
+                example: "Stewart"
+              surname:
+                type: string
+                required: true
+                example: "Dalwiq"
+              wishlist:
+                type: array
+                required: true
+                example: ["car","house"]
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Success
+
