@@ -24,9 +24,8 @@ import {schema} from "@ioc:Adonis/Core/Validator";
 //https://medium.com/@shemsiu/ioc-container-and-dependency-injection-in-adonis-v5-216774c2a476
 const santaService = new SantaService()
 
-Route.post('/apply', async ({request, response}) => {
+Route.post('/apply', async ({request, response}):Promise<object> => {
 
-  console.log(request.body())
   const newPersonSchema = schema.create({
     name: schema.string({ trim: true, escape: false }),
     surname: schema.string({ trim: true, escape: false }),
@@ -41,11 +40,11 @@ Route.post('/apply', async ({request, response}) => {
     response.badRequest(error.messages)
   }
 
-  let id = await santaService.apply(person)
+  let id: number = await santaService.apply(person)
   return { id }
 })
 
-Route.post('/shuffle', async () => {
+Route.post('/shuffle', async ():Promise<object> => {
   await santaService.shuffle()
   return { rez: 'Alea jacta est, ave Santas' }
 })

@@ -10,43 +10,43 @@ const MAXPLAYERS = 80
 
 export default class SantaService {
   public async apply(person) {
-    const count = (await Person.all()).length
+    const count: number = (await Person.all()).length
     if (count >= MAXPLAYERS) {
       throw new Exception('Est modus in rebus. Too many Santas')
     }
 
-    let p = new Person()
+    let p: Person = new Person()
     p.name = person.name
     p.surname = person.surname
     p.wishlist = JSON.stringify(person.wishlist)
-    let rez = await p.save()
+    let rez: Person = await p.save()
     return (rez['$attributes'].id)
   }
 
-  public async shuffle() {
+  public async shuffle():Promise<void> {
     if (await Link.first()) {
       throw new Exception('Littĕra scripta manet. Game already started')
     }
 
-    const count = (await Person.all()).length
+    const count: number = (await Person.all()).length
     if (count<MINPLAYERS || count >= MAXPLAYERS) {
       throw new Exception('Est modus in rebus, illegal Santas quantity')
     }
 
-    const persons = await Person.all()
-    let ids = persons.map(el => el['$attributes'].id)
+    const persons: Person[] = await Person.all()
+    let ids: number[] = persons.map(el => el['$attributes'].id)
 
-    const links = santa.shuffle(ids)
+    const links: Link[] = santa.shuffle(ids)
     for (let link of links) {
-      let record = new Link()
+      let record: Link = new Link()
       record.patron = link[0]
       record.client = link[1]
       record.save()
     }
   }
 
-  public async getClient(id: number) {
-    const link = await Link.findBy('patron', id)
+  public async getClient(id: number):Promise<object|undefined> {
+    const link: Link|null = await Link.findBy('patron', id)
     if (link) {
       let client = await Person.findBy('id', link['$attributes'].client)
       if (client) {

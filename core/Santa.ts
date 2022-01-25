@@ -1,6 +1,6 @@
 export default class Santa { //Santa Domain
 
-  public shuffle(personsIds) {
+  public shuffle(personsIds):[] {
     const n = personsIds.length
     let links: any = []
 
